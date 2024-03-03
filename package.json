@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
+    "mongoose": "^8.2.0",
     "mysql2": "^3.9.1",
     "sequelize": "^6.37.1",
     "sequelize-cli": "^6.6.2"
