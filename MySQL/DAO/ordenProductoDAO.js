@@ -1,4 +1,4 @@
-const { OrdenProducto } = require('../models/ordenproducto'); 
+const { OrdenProducto } = require('../models'); 
 
 class OrdenProductoDAO {
   static async getAllOrdenProductos() {

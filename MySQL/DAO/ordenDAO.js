@@ -1,4 +1,4 @@
-const { Orden } = require('../models/orden'); // Ajusta la ruta según la ubicación de tu modelo
+const { Orden } = require('../models'); // Ajusta la ruta según la ubicación de tu modelo
 
 class OrdenDAO {
   static async getAllOrdenes() {

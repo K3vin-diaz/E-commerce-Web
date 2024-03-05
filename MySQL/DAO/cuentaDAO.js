@@ -1,4 +1,4 @@
-const { Cuenta } = require('../models/cuenta'); // Ajusta la ruta según la ubicación de tu modelo
+const { Cuenta } = require('../models'); // Ajusta la ruta según la ubicación de tu modelo
 
 class CuentaDAO {
   static async getAllCuentas() {

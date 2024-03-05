@@ -1,4 +1,4 @@
-const { Producto } = require('../models/producto'); // Ajusta la ruta según la ubicación de tu modelo
+const { Producto } = require('../models'); // Ajusta la ruta según la ubicación de tu modelo
 
 class ProductoDAO {
   static async getAllProductos() {

@@ -1,4 +1,4 @@
-const { Categoria } = require('../models/categoria'); // Asegúrate de ajustar la ruta según la ubicación de tu modelo
+const { Categoria } = require('../models'); // Asegúrate de ajustar la ruta según la ubicación de tu modelo
 
 class CategoriaDAO {
   static async getAllCategorias() {
