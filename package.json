@@ -1,7 +1,7 @@
 {
   "name": "e-commerce-web",
   "version": "1.0.0",
-  "description": "",
+  "description": "```\r npx sequelize db:migrate --name 20240221060002-create-categoria\r npx sequelize db:migrate --name 20240221064545-create-cuenta\r npx sequelize db:migrate --name 20240221071601-create-orden\r npx sequelize db:migrate --name 20240221070216-create-producto\r npx sequelize db:migrate --name 20240221065308-create-lista-deseos\r npx sequelize db:migrate --name 20240221065442-create-orden-producto\r ```",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
-    "mongoose": "^8.2.0",
+    "mongoose": "^8.2.1",
     "mysql2": "^3.9.1",
     "sequelize": "^6.37.1",
     "sequelize-cli": "^6.6.2"

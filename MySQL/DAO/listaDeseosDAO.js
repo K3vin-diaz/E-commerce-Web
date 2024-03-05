@@ -1,4 +1,4 @@
-const { ListaDeseos } = require('./models'); // Ajusta la ruta según la ubicación de tu modelo
+const { ListaDeseos } = require('../models/listadeseos.js'); // Ajusta la ruta según la ubicación de tu modelo
 
 class ListaDeseosDAO {
   static async getAllListasDeseos() {
