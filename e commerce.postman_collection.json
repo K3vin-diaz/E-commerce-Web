@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "1ba49d1d-4ff0-4ced-b556-c9449ce434e3",
+		"_postman_id": "d36f0861-8935-4927-8146-45773019aeb6",
 		"name": "e commerce",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "33491178"
+		"_exporter_id": "28014077"
 	},
 	"item": [
 		{
@@ -64,7 +64,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/categoria/8",
+							"raw": "http://localhost:3000/api/categoria/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -73,7 +73,67 @@
 							"path": [
 								"api",
 								"categoria",
-								"8"
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarCategoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Categoria prueba actualizada\",\r\n    \"descripcion\": \"prueba descripcion actualizada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/categoria/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categoria",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarCategoriaError",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Categoria prueba actualizada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/categoria/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categoria",
+								"1"
 							]
 						}
 					},
@@ -153,6 +213,57 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "EliminarCuentaError",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/cuenta/a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"cuenta",
+								"a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarCuenta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario\":\"tilin\",\r\n    \"email\":\"actualizado@gmail.com\",\r\n    \"password\": \"contrasena123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/cuenta/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"cuenta",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -186,7 +297,36 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idCuenta\": 11.0,\r\n    \"idProducto\": 5.0\r\n}",
+							"raw": "{\r\n    \"idCuenta\": 1.0,\r\n    \"idProducto\": 1.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/listadeseos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"listadeseos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AgregarListaDeseosError",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idCuenta\": 1.0,\r\n    \"idProducto\": \"a\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -228,6 +368,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "ActualizarListaDeseos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idCuenta\": 1,\r\n    \"idProducto\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/listadeseos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"listadeseos",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -261,7 +431,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fecha\": \"2024-03-18\",\r\n    \"idCuenta\": 11\r\n}",
+							"raw": "{\r\n    \"fecha\": \"2024-03-18\",\r\n    \"idCuenta\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -332,6 +502,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "ActualizarOrden",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fecha\": \"2024-03-19\",\r\n    \"idCuenta\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/orden/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"orden",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -365,7 +565,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idOrden\": 9,\r\n    \"idProducto\": 5,\r\n    \"cantidadVendida\": 3,\r\n    \"subtotal\": 99.50,\r\n    \"precioVenta\": 99.50\r\n}",
+							"raw": "{\r\n    \"idOrden\": 2,\r\n    \"idProducto\": 1,\r\n    \"cantidadVendida\": 3,\r\n    \"subtotal\": 99.50,\r\n    \"precioVenta\": 99.50\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -407,6 +607,66 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "ActualizarOrdenProducto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idOrden\": 2,\r\n    \"idProducto\": 3,\r\n    \"cantidadVendida\": 3,\r\n    \"subtotal\": 99.50,\r\n    \"precioVenta\": 99.50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/ordenproducto/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ordenproducto",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarOrdenProductoError",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idOrden\": 2,\r\n    \"idProducto\": 3,\r\n    \"cantidadVendida\": 3,\r\n    \"subtotal\": 99.50,\r\n    \"precioVenta\": 99.50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/ordenproducto/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ordenproducto",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -440,7 +700,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"nombre\": \"producto 4000\",\r\n        \"descripcion\": \"descripcion prueba postman2\",\r\n        \"precio\": \"300\",\r\n        \"idCategoria\": 7\r\n}",
+							"raw": "{\r\n        \"nombre\": \"producto\",\r\n        \"descripcion\": \"descripcion prueba postman\",\r\n        \"precio\": \"200\",\r\n        \"idCategoria\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -507,6 +767,36 @@
 								"api",
 								"producto",
 								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarProducto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nombre\": \"producto actualizado\",\r\n        \"descripcion\": \"descripcion prueba actualizado\",\r\n        \"precio\": \"100\",\r\n        \"idCategoria\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/producto/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"producto",
+								"1"
 							]
 						}
 					},
