@@ -1,4 +1,3 @@
-const fetch = require('node-fetch');
 
 const manejarErrores = (response) => {
     if (!response.ok) {
@@ -69,4 +68,12 @@ const eliminarCuenta = async (id) => {
     } catch (error) {
         console.error('Error al eliminar la cuenta:', error);
     }
+};
+
+module.exports = {
+    obtenerTodasLasCuentas,
+    obtenerCuentaPorId,
+    crearCuenta,
+    actualizarCuenta,
+    eliminarCuenta
 };

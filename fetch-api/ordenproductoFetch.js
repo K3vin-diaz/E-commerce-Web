@@ -1,4 +1,3 @@
-const fetch = require('node-fetch');
 
 const manejarErrores = (response) => {
     if (!response.ok) {
@@ -69,4 +68,12 @@ const eliminarProductoDeOrden = async (id) => {
     } catch (error) {
         console.error('Error al eliminar el producto de orden:', error);
     }
+};
+
+module.exports = {
+    obtenerTodosLosProductosDeOrden,
+    obtenerProductoDeOrdenPorId,
+    crearProductoDeOrden,
+    actualizarProductoDeOrden,
+    eliminarProductoDeOrden
 };

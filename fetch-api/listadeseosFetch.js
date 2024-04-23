@@ -1,4 +1,3 @@
-const fetch = require('node-fetch');
 
 const manejarErrores = (response) => {
     if (!response.ok) {
@@ -69,4 +68,12 @@ const eliminarListaDeseos = async (id) => {
     } catch (error) {
         console.error('Error al eliminar la lista de deseos:', error);
     }
+};
+
+module.exports = {
+    obtenerTodasLasListasDeseos,
+    obtenerListaDeseosPorId,
+    crearListaDeseos,
+    actualizarListaDeseos,
+    eliminarListaDeseos
 };

@@ -1,4 +1,3 @@
-const fetch = require('node-fetch');
 
 const manejarErrores = (response) => {
     if (!response.ok) {
@@ -69,4 +68,11 @@ const eliminarOrden = async (id) => {
     } catch (error) {
         console.error('Error al eliminar la orden:', error);
     }
+};
+module.exports = {
+    obtenerTodasLasOrdenes,
+    obtenerOrdenPorId,
+    crearOrden,
+    actualizarOrden,
+    eliminarOrden
 };
