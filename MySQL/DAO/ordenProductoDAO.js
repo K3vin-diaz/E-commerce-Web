@@ -47,7 +47,7 @@ class OrdenProductoDAO {
         });
         return ordenProducto;
       } else {
-        throw new Error('OrdenProducto no encontrado');
+        throw new Error('Producto de la orden no encontrado');
       }
     } catch (error) {
       throw new Error(`Error al actualizar el producto de la orden: ${error.message}`);

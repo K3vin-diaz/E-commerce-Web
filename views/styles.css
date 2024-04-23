@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Titulos';
+    src: url('src/assets/fonts/LeagueSpartan-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Subtitulos';
+    src: url('src/assets/fonts/Ablation.otf') format('truetype');
+}
+
+body {
+    font-family: 'Titulos';
+    margin: 0;
+    padding: 0;
+    background-color: #272727;
+}
+
+* {
+    user-select: none;
+}

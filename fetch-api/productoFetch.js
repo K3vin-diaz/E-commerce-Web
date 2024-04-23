@@ -1,12 +1,11 @@
-
-const manejarErrores = (response) => {
+export const manejarErrores = (response) => {
     if (!response.ok) {
         throw Error(response.statusText);
     }
     return response;
 };
 
-const obtenerTodosLosProductos = async () => {
+export const obtenerTodosLosProductos = async () => {
     try {
         const respuesta = await fetch('http://localhost:3000/api/producto');
         manejarErrores(respuesta);
@@ -16,7 +15,7 @@ const obtenerTodosLosProductos = async () => {
     }
 };
 
-const obtenerProductoPorId = async (id) => {
+export const obtenerProductoPorId = async (id) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/producto/${id}`);
         manejarErrores(respuesta);
@@ -26,7 +25,7 @@ const obtenerProductoPorId = async (id) => {
     }
 };
 
-const crearProducto = async (nombre, descripcion, precio, idCategoria) => {
+export const crearProducto = async (nombre, descripcion, precio, idCategoria) => {
     try {
         const respuesta = await fetch('http://localhost:3000/api/producto', {
             method: 'POST',
@@ -42,7 +41,7 @@ const crearProducto = async (nombre, descripcion, precio, idCategoria) => {
     }
 };
 
-const actualizarProducto = async (id, nombre, descripcion, precio, idCategoria) => {
+export const actualizarProducto = async (id, nombre, descripcion, precio, idCategoria) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/producto/${id}`, {
             method: 'PUT',
@@ -58,7 +57,7 @@ const actualizarProducto = async (id, nombre, descripcion, precio, idCategoria) 
     }
 };
 
-const eliminarProducto = async (id) => {
+export const eliminarProducto = async (id) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/producto/${id}`, {
             method: 'DELETE'
@@ -69,12 +68,3 @@ const eliminarProducto = async (id) => {
         console.error('Error al eliminar el producto:', error);
     }
 };
-module.exports = {
-    obtenerTodosLosProductos,
-    obtenerProductoPorId,
-    crearProducto,
-    actualizarProducto,
-    eliminarProducto
-};
-
-

@@ -8,9 +8,11 @@ const listadeseosRouter = require('./routes/listadeseos');
 const ordenRouter = require('./routes/orden');
 const ordenproductoRouter = require('./routes/ordenproducto');
 const productoRouter = require('./routes/producto');
+const cors = require('cors');
 
 app.use(express.json());
 app.use(morgan('combined'));
+app.use(cors());
 
 app.use('/api/categoria', categoriaRouter);
 app.use('/api/cuenta', cuentaRouter);

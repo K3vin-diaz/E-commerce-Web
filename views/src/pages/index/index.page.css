@@ -1,0 +1,82 @@
+@font-face {
+    font-family: 'Titulos';
+    src: url('src/assets/fonts/LeagueSpartan-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Subtitulos';
+    src: url('src/assets/fonts/Ablation.otf') format('truetype');
+}
+
+body {
+    font-family: 'Titulos';
+    margin: 0;
+    padding: 0;
+    background-color: #272727;
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+}
+
+#banner-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+#detail-img {
+    left: -30%;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
+
+.producto{
+    margin: 10% 0 0 10%;
+}
+
+.producto h1{
+    color: #d9f27e;
+    font-size: 6vw;
+    margin: 0;
+}
+
+.descripcion{
+    color: white;
+    margin: 0 0 0 10%;
+}
+
+.descripcion p{
+    font-size: 1.3vw;
+    font-family: 'Subtitulos';
+}
+
+.boton-detalles{
+    width: 100%;
+    margin-top: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ver-detalles{
+    padding: 10px 2%;
+    font-family: 'Subtitulos';
+    font-size: 1.3vw;
+    color: white;
+    background-color: #5271FF;
+    border: none;
+    border-radius: 20px;
+}
+
+.test{
+    color: white;
+    font-size: 2em;
+    margin-right: 100px;
+}

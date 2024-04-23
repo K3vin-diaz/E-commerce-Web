@@ -9,22 +9,22 @@ async function test() {
 
         // Obtener producto por ID
         console.log("\nObteniendo producto por ID:");
-        const productoPorId = await productoFetch.obtenerProductoPorId(5); 
+        const productoPorId = await productoFetch.obtenerProductoPorId(1); 
         console.log(productoPorId);
 
         // Crear producto
-        console.log("\nCreando un nuevo producto:");
-        const nuevoProducto = await productoFetch.crearProducto("Nombre del Producto", "Descripción del Producto", 10.99, 6);
-        console.log(nuevoProducto);
+        /* console.log("\nCreando un nuevo producto:");
+        const nuevoProducto = await productoFetch.crearProducto("Nombre del Producto", "Descripción del Producto", 10.99, 1);
+        console.log(nuevoProducto); */
 
         // Actualizar producto
         console.log("\nActualizando un producto:");
-        const productoActualizado = await productoFetch.actualizarProducto(13, "Nuevo Nombre222", "Nueva Descripción", 15.99, 11); 
+        const productoActualizado = await productoFetch.actualizarProducto(5, "Nuevo Nombre222", "Nueva Descripción", 15.99, 1); 
         console.log(productoActualizado);
 
         // Eliminar producto
         console.log("\nEliminando un producto:");
-        const resultadoEliminacion = await productoFetch.eliminarProducto(15); 
+        const resultadoEliminacion = await productoFetch.eliminarProducto(5); 
         console.log(resultadoEliminacion);
     } catch (error) {
         console.error('Error en el test:', error);
