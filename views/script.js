@@ -6,20 +6,28 @@ import { LoginPage } from "./src/pages/login/login.page.js";
 import { RegisterPage } from "./src/pages/register/register.page.js";
 import { SearchPage } from "./src/pages/search/search.page.js";
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     //configuración de rutas
-    page('/', ()=> showContent('index-page'));
-    page('/login', ()=> showContent('login-page'));
-    page('/register', ()=> showContent('register-page'));
-    page('/search', ()=> showContent('search-page'));
+    page('/views/', () => showContent('index-page', "cont"));
+    page('/views/login', () => showContent('login-page'));
+    page('/views/register', () => showContent('register-page'));
+    page('/views/search', () => showContent('search-page'));
 
     //inicializar el routeo
     page();
 })
 
-function showContent(contentId){
-    const contentContainer =  document.getElementById('content');
-    contentContainer.innerHTML = `<${contentId}></${contentId}>`
+function showContent(contentId, id) {
+    const contentContainer = document.getElementById('content');
+    if(id === undefined){
+        contentContainer.innerHTML = `<${contentId}></${contentId}>`;
+    }else{
+        contentContainer.innerHTML = `<${contentId} id = ${id}></${contentId}>`;
+    }
+}
+
+window.navigateTo = function(path) {
+    page(path); // Cambiar la ruta usando page.js
 }
 
 //Components
@@ -31,4 +39,3 @@ window.customElements.define('index-page', IndexPage);
 window.customElements.define('login-page', LoginPage);
 window.customElements.define('register-page', RegisterPage);
 window.customElements.define('search-page', SearchPage);
-/* window.customElements.define('cart-page', CartPage); */

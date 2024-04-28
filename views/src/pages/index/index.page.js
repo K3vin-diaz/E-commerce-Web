@@ -8,6 +8,7 @@ export class IndexPage extends HTMLElement {
     connectedCallback() {
         this.#agregaEstilo(this.shadow);
         this.#render(this.shadow);
+        this.#waitForImagesToLoad(this.shadow);
     }
 
     #render(shadow) {
@@ -28,9 +29,6 @@ export class IndexPage extends HTMLElement {
             </div>
             <product-index producto-Id="1" version="1"></product-index>
             <product-index producto-Id="3" version="2"></product-index>
-            <a href="/login" class="test">LOGIN</a>
-            <a href="/register" class="test">REGISTER</a>
-            <a href="/search" class="test">SEARCH</a>
 		`;
     }
 
@@ -39,6 +37,29 @@ export class IndexPage extends HTMLElement {
         link.setAttribute("rel", "stylesheet");
         link.setAttribute("href", "./src/pages/index/index.page.css");
         shadow.appendChild(link);
+    }
+
+    #waitForImagesToLoad(shadow) {
+        const img = shadow.querySelector('#banner-img');
+        const detailImg = shadow.querySelector('#detail-img');
+
+        const imagesToLoad = [img, detailImg];
+        let loadedCount = 0;
+
+        const checkAllImagesLoaded = () => {
+            loadedCount++;
+            if (loadedCount === imagesToLoad.length) {
+                resizeBanner(shadow);
+            }
+        };
+
+        imagesToLoad.forEach(image => {
+            if (image.complete) {
+                checkAllImagesLoaded();
+            } else {
+                image.addEventListener('load', checkAllImagesLoaded);
+            }
+        });
     }
 }
 
@@ -50,12 +71,14 @@ window.addEventListener('resize', resizeBanner);
 
 function resizeBanner() {
     const contenedor = document.querySelector('#cont');
-    const shadowRoot = contenedor.shadowRoot;
+    if (contenedor !== null) {
+        const shadowRoot = contenedor.shadowRoot;
 
-    var banner = shadowRoot.querySelector('.banner');
-    var img = shadowRoot.getElementById('banner-img');
-    var imgDetail = shadowRoot.getElementById('detail-img');
-    var imgHeight = img.clientHeight;
-    banner.style.height = imgHeight + 'px';
-    imgDetail.style.height = imgHeight + 'px';
+        var banner = shadowRoot.querySelector('.banner');
+        var img = shadowRoot.getElementById('banner-img');
+        var imgDetail = shadowRoot.getElementById('detail-img');
+        var imgHeight = img.clientHeight;
+        banner.style.height = imgHeight + 'px';
+        imgDetail.style.height = imgHeight + 'px';
+    }
 }

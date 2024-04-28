@@ -74,7 +74,7 @@ export class ProductIndexComponent extends HTMLElement {
                 let element2 = shadow.querySelector('#descripcion');
                 element2.innerHTML = producto.descripcion;
                 let element3 = shadow.querySelector('#precio');
-                element3.innerHTML = producto.precio;
+                element3.innerHTML = "$" + producto.precio;
             })
     }
 }

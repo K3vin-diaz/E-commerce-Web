@@ -1,4 +1,4 @@
-.tarjeta{
+.tarjeta {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -36,17 +36,17 @@
     height: 50px;
 }
 
-.info{
+.info {
     width: 50%;
 }
 
-#nombre{
+#nombre {
     color: #d9f27e;
     font-size: 4vw;
     margin: 0;
 }
 
-#descripcion{
+#descripcion {
     color: white;
     font-size: 1vw;
     margin: 0;
@@ -54,14 +54,14 @@
     margin-top: 2%;
 }
 
-#precio{
+#precio {
     color: white;
     font-size: 2vw;
     margin: 0;
     font-family: 'Subtitulos';
 }
 
-.ver-detalles{
+.ver-detalles {
     padding: 10px 10%;
     font-family: 'Subtitulos';
     font-size: 1.3vw;
@@ -70,12 +70,18 @@
     border: none;
     border-radius: 10px;
     margin-top: 2%;
+    z-index: 1;
 }
 
-.version2{
+.boton-detalles button:active,
+.version2 button:active {
+    background-color: #272727;
+}
+
+.version2 {
     text-align: right;
 }
 
-#nombre.version2{
+#nombre.version2 {
     color: #f26398;
 }

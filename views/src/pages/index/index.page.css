@@ -75,6 +75,10 @@ body {
     border-radius: 20px;
 }
 
+.boton-detalles button:active{
+    background-color:  #272727;
+}
+
 .test{
     color: white;
     font-size: 2em;
