@@ -1,3 +1,5 @@
+import { SessionStorageService } from "../../services/SessionStorage.service.js";
+
 export class LoginPage extends HTMLElement {
 
     constructor() {
@@ -12,7 +14,6 @@ export class LoginPage extends HTMLElement {
 
     #render(shadow) {
         shadow.innerHTML += `
-            <header-info site="login"></header-info>
             <div class="login">
                 <h1>Iniciar sesión</h1>
                 <div class="login-form">

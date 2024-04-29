@@ -1,3 +1,5 @@
+import { SessionStorageService } from "../../services/SessionStorage.service.js";
+
 export class RegisterPage extends HTMLElement {
 
     constructor() {
@@ -12,7 +14,6 @@ export class RegisterPage extends HTMLElement {
 
     #render(shadow) {
         shadow.innerHTML += `
-            <header-info site="register"></header-info>
             <div class="login">
                 <h1>Crea tu cuenta</h1>
                 <div class="login-form">

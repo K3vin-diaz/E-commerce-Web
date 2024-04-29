@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'Titulos';
+    src: url('src/assets/fonts/LeagueSpartan-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Subtitulos';
+    src: url('src/assets/fonts/Ablation.otf') format('truetype');
+}
+
+body {
+    font-family: 'Titulos';
+    margin: 0;
+    padding: 0;
+    background-color: #272727;
+}
+
+.search-content {
+    display: flex;
+}
+
+.filtros {
+    display: flex;
+    width: 20%;
+    padding: 10px;
+    text-align: center;
+    flex-direction: column;
+    height: 50vh;
+}
+
+.filtros h1{
+    font-size: 2vw;
+    color: white;
+}
+
+.filtros select{
+    width: 60%;
+    font-size: 1vw;
+    font-family: 'Titulos';
+    background-color: white;
+    align-self: center;
+}
+
+select:focus {
+    outline: none;
+}
+
+.categorias{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    align-self: center;
+}
+
+.opcion{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5%;
+}
+
+.opcion label{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5vw;
+    font-family: 'Subtitulos';
+    text-align: left;
+    color: white;
+}
+
+.opcion input[type="checkbox"]{
+    height: 1.5vw;
+    width: 1.5vw;
+}
+
+.resultados {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-right: 15%;
+    height: fit-content;
+}

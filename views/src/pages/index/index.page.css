@@ -16,8 +16,8 @@ body {
 }
 
 .banner {
-    position: relative;
     width: 100%;
+    
 }
 
 #banner-img {
@@ -37,27 +37,27 @@ body {
     z-index: -1;
 }
 
-.producto{
+.producto {
     margin: 10% 0 0 10%;
 }
 
-.producto h1{
+.producto h1 {
     color: #d9f27e;
     font-size: 6vw;
     margin: 0;
 }
 
-.descripcion{
+.descripcion {
     color: white;
     margin: 0 0 0 10%;
 }
 
-.descripcion p{
+.descripcion p {
     font-size: 1.3vw;
     font-family: 'Subtitulos';
 }
 
-.boton-detalles{
+.boton-detalles {
     width: 100%;
     margin-top: 10%;
     display: flex;
@@ -65,7 +65,7 @@ body {
     justify-content: center;
 }
 
-.ver-detalles{
+.ver-detalles {
     padding: 10px 2%;
     font-family: 'Subtitulos';
     font-size: 1.3vw;
@@ -75,12 +75,7 @@ body {
     border-radius: 20px;
 }
 
-.boton-detalles button:active{
-    background-color:  #272727;
-}
-
-.test{
-    color: white;
-    font-size: 2em;
-    margin-right: 100px;
+.boton-detalles button:active {
+    background-color: #272727;
+    border: white 1px solid;
 }

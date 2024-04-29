@@ -76,6 +76,7 @@
 .boton-detalles button:active,
 .version2 button:active {
     background-color: #272727;
+    border: white 1px solid;
 }
 
 .version2 {

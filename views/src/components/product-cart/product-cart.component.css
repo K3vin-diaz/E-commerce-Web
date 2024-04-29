@@ -1,17 +1,15 @@
 .tarjeta {
     display: flex;
-    flex-direction: column;
-    height: 40vh;
-    padding: 5% 10%;
+    height: 15vh;
+    padding: 2% 0;
 }
 
 .imagen-container {
     position: relative;
-    width: 100%;
-    height: 40%;
-    margin: 0;
+    width: 40%;
+    height: 100%;
+    margin: 0 2% 0 0;
     padding: 0;
-    margin-bottom: 5%;
 }
 
 .tarjeta img {
@@ -21,38 +19,24 @@
     border-radius: 10px;
 }
 
-.boton-icono {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    z-index: 1;
-    padding: 0;
-}
-
-.boton-icono img {
-    width: 50px;
-    height: 50px;
-}
-
 .info {
+    display: flex;
     width: 100%;
-    height: max-content;
+    height: 15vh;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #nombre {
     color: #d9f27e;
-    font-size: 2vw;
+    font-size: 3vw;
     margin: 0;
+    font-weight: bold;
 }
 
 #precio {
     color: white;
-    font-size: 2vw;
+    font-size: 3vw;
     margin: 0;
     font-weight: bold;
     font-family: 'Subtitulos';
@@ -71,7 +55,14 @@
     text-decoration: none;
 }
 
-.boton-detalles a:active{
-    background-color:  #272727;
+.boton-detalles a:active {
+    background-color: #272727;
     border: white 1px solid;
+}
+
+.salto {
+    border-bottom: 1px solid #5271FF;
+    width: 100%;
+    height: 1px;
+    display: block;
 }

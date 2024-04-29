@@ -54,9 +54,6 @@ export class ProductIndexComponent extends HTMLElement {
             </section>
             `
         }
-
-
-        /* shadow.getElementById(`btn${product.id}`).addEventListener('click', () => this.#addToCartHandler(product)); */
     }
 
     #agregarEstilo(shadow) {

@@ -1,0 +1,115 @@
+@font-face {
+    font-family: 'Titulos';
+    src: url('src/assets/fonts/LeagueSpartan-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Subtitulos';
+    src: url('src/assets/fonts/Ablation.otf') format('truetype');
+}
+
+body {
+    font-family: 'Titulos';
+    margin: 0;
+    padding: 0;
+    background-color: #272727;
+}
+
+/* css q si sirve */
+
+.contenido {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 25% 25% 1fr;
+    grid-template-rows: 1fr auto auto auto;
+    gap: 0px 2%;
+    grid-template-areas:
+        "img img nombre"
+        "img img precio"
+        "descripcion descripcion ."
+        ". . botones";
+    padding: 5% 10% 5% 10%;
+}
+
+.nombre {
+    grid-area: nombre;
+    color: #d9f27e;
+    font-size: 3vw;
+}
+
+.nombre h1{
+    margin: 2% 0 2% 0;
+}
+
+.precio {
+    grid-area: precio;
+    color: white;
+    font-family: 'Subtitulos';
+    font-size: 2vw;
+    width: fit-content;
+    height: fit-content;
+}
+
+.img {
+    grid-area: img;
+    width: 100%;
+    height: min-content;
+}
+
+.img img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.descripcion {
+    grid-area: descripcion;
+    width: 80%;
+    color: white;
+    font-family: 'Subtitulos';
+}
+
+.botones {
+    grid-area: botones;
+    display: flex;
+}
+
+.comprar {
+    font-family: 'Subtitulos';
+    font-size: 1.3vw;
+    color: white;
+    background-color: #5271FF;
+    border: none;
+    border-radius: 10px;
+    width: 30%;
+    height: 3vw;
+    margin-right: 2%;
+}
+
+.comprar:active{
+    background-color:  #272727;
+    border: white 1px solid;
+}
+
+.boton-icono,.boton-icono img{
+    width: 3vw;
+    height: 3vw;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background-color: transparent;
+}
+
+.aviso{
+    display: none;
+    width: 100%;
+    background-color: #5271FF;
+}
+
+.aviso h1{
+    color: white;
+    font-size: 3vw;
+    text-align: center;
+    padding: 2% 0;
+    margin: 0;
+}

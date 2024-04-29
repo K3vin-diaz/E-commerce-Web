@@ -16,7 +16,6 @@ export class IndexPage extends HTMLElement {
             <div class="banner">
                 <img src="src/assets/images/banner.png" id="banner-img" alt="Imagen de banner">
                 <img src="src/assets/images/efecto.png" id="detail-img" alt="Imagen del frente">
-                <header-info site="/"></header-info>
                 <div class="producto">
                     <h1>Intel Core <br> i9 14th Gen</h1>
                 </div>
@@ -78,7 +77,8 @@ function resizeBanner() {
         var img = shadowRoot.getElementById('banner-img');
         var imgDetail = shadowRoot.getElementById('detail-img');
         var imgHeight = img.clientHeight;
-        banner.style.height = imgHeight + 'px';
+        var bannerHeight = imgHeight - (imgHeight/4)
+        banner.style.height = bannerHeight + 'px';
         imgDetail.style.height = imgHeight + 'px';
     }
 }
