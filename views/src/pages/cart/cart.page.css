@@ -83,3 +83,17 @@ button:active {
     font-family: 'Subtitulos';
     padding-top: 5%;
 }
+
+.aviso2{
+    display: none;
+    width: 100%;
+    background-color: #5271FF;
+}
+
+.aviso2 h1{
+    color: white;
+    font-size: 3vw;
+    text-align: center;
+    padding: 2% 0;
+    margin: 0;
+}

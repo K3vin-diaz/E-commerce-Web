@@ -35,4 +35,8 @@ export class CookieService {
         const productsCookie = this.getCookie('ProductsInCart');
         return productsCookie ? JSON.parse(productsCookie) : [];
     }
+
+    static deleteCookie(name) {
+        this.setCookie(name, '', -1);
+    }
 }

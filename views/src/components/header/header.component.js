@@ -1,4 +1,5 @@
 import { CookieService } from "../../services/Cookie.service.js";
+import { SessionStorageService } from "../../services/SessionStorage.service.js";
 
 export class HeaderComponent extends HTMLElement {
     constructor() {
@@ -11,7 +12,7 @@ export class HeaderComponent extends HTMLElement {
         this.#addStyles(shadow);
         this.#render(shadow);
         window.addEventListener('addToCart', (event) => this.#addToCartHandler(shadow, event.detail.product));
-        /* window.addEventListener('login', (event) => this.#changeToUser(event.detail.user, shadow)); */
+        window.addEventListener('pagarCarrito', () => this.#vaciarCarro(shadow));
 
         const links = shadow.querySelectorAll('.links');
         links.forEach(link => {
@@ -73,7 +74,7 @@ export class HeaderComponent extends HTMLElement {
     }
 
     #addToCartHandler(shadow) {
-        const cart = shadow.getElementById('cart');
+        const cart = shadow.getElementById('cart-text');
         if (cart) {
             const cartText = cart.textContent.trim();
             const numberOnly = cartText.replace('Carrito (', '').replace(')', '');
@@ -142,5 +143,13 @@ export class HeaderComponent extends HTMLElement {
             const href = shadow.getElementById("cart").getAttribute('href');
             this.#handleLinkClick(href, shadow);
         });
+
+        
+        SessionStorageService.setItem('pago', false);
+    }
+
+    #vaciarCarro(shadow){
+        shadow.getElementById('cart-text').textContent = "Carrito (0)";
+        SessionStorageService.setItem('pago',true);
     }
 }

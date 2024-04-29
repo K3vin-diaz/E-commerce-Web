@@ -9,6 +9,7 @@ import { RegisterPage } from "./src/pages/register/register.page.js";
 import { SearchPage } from "./src/pages/search/search.page.js";
 import { CartPage } from "./src/pages/cart/cart.page.js";
 import { ProductPage } from "./src/pages/product/product.page.js";
+import { CheckoutPage } from "./src/pages/checkout/checkout.page.js"; 
 
 document.addEventListener('DOMContentLoaded', function () {
     //configuración de rutas
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     page('/views/search', () => showContent('search-page'));
     page('/views/cart', () => showContent('cart-page'));
     page('/views/product', () => showContent('product-page'));
+    page('/views/checkout', () => showContent('checkout-page'));
 
     page('/views/*', () => showContent('index-page', "cont"));
 
@@ -50,3 +52,4 @@ window.customElements.define('register-page', RegisterPage);
 window.customElements.define('search-page', SearchPage);
 window.customElements.define('cart-page', CartPage);
 window.customElements.define('product-page', ProductPage);
+window.customElements.define('checkout-page', CheckoutPage);

@@ -1,4 +1,5 @@
 import { CookieService } from "../../services/Cookie.service.js";
+import { SessionStorageService } from "../../services/SessionStorage.service.js";
 import * as productoFecth from '../../../../fetch-api/productoFetch.js';
 
 export class CartPage extends HTMLElement {
@@ -28,6 +29,9 @@ export class CartPage extends HTMLElement {
 
     #render(shadow) {
         shadow.innerHTML += `
+            <div class="aviso2" id="aviso2">
+                <h1>Gracias por su compra</h1>
+            </div>
             <div class="cart-container">
                 <h1>Carrito de compras</h1>
                 <h1 id="aviso">Agrega productos al carrito. . .</h1>
@@ -39,7 +43,7 @@ export class CartPage extends HTMLElement {
                         </div>
                     </div>
                     <div class="boton" id="boton">
-                        <button>Comprar</button>
+                        <a href="/views/checkout"><button id="comprar">Comprar</button></a>
                     </div>
                 </div>
             </div>
@@ -49,6 +53,13 @@ export class CartPage extends HTMLElement {
             shadow.getElementById('aviso').style.display = 'block';
             shadow.getElementById('boton').style.display = 'none';
             shadow.getElementById('total').style.display = 'none';
+        }
+
+        shadow.getElementById(`comprar`).addEventListener('click', () => this.#guardarTotal());
+
+        if (SessionStorageService.getItem('pago') === 'true') {
+            shadow.getElementById('aviso2').style.display = "block";
+            SessionStorageService.setItem('pago', false)
         }
     }
 
@@ -65,5 +76,9 @@ export class CartPage extends HTMLElement {
         return `
 			<product-cart id="${product.id}" nombre="${product.nombre}" descripcion="${product.descripcion}" precio="${product.precio}" categoria="${product.categoria}"></product-cart>
 		`
+    }
+
+    #guardarTotal() {
+        SessionStorageService.setItem('total', this.total);
     }
 }
