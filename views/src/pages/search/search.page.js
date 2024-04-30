@@ -1,27 +1,26 @@
-import * as productoFecth from "../../../../fetch-api/productoFetch.js";
+import * as productoFecth from '../../../../fetch-api/productoFetch.js';
 
 export class SearchPage extends HTMLElement {
-  constructor() {
-    super();
-    this.shadow = this.attachShadow({ mode: "open" });
-    this.filterText = "";
-  }
 
-  connectedCallback() {
-    this.#agregaEstilo(this.shadow);
-    productoFecth
-      .obtenerTodosLosProductos()
-      .then((listaProductos) => {
-        this.products = listaProductos;
-        this.#render(this.shadow);
-      })
-      .catch((error) => {
-        console.error("Ocurrió un error al obtener los productos:", error);
-      });
-  }
+    constructor() {
+        super();
+        this.shadow = this.attachShadow({ mode: "open" });
+    }
 
-  #render(shadow) {
-    shadow.innerHTML = `
+    connectedCallback() {
+        this.#agregaEstilo(this.shadow);
+        productoFecth.obtenerTodosLosProductos()
+            .then(listaProductos => {
+                this.products = listaProductos;
+                this.#render(this.shadow);
+            })
+            .catch(error => {
+                console.error('Ocurrió un error al obtener los productos:', error);
+            });
+    }
+
+    #render(shadow) {
+        shadow.innerHTML += `
             <section class="search-content">
                 <div class="filtros">
                     <h1>Ordenar por:</h1>
@@ -52,34 +51,24 @@ export class SearchPage extends HTMLElement {
                             <input type="checkbox" id="Perifericos" name="Perifericos">
                         </div>
                     </div>
-
-                    <h1>Buscar:</h1>
-                    <input type="text" id="search" name="search" oninput="this.getRootNode().host.filterText = this.value; this.getRootNode().host.#render(this.getRootNode());">
                 </div>
                 <div class="resultados">
-                    ${this.products
-                      .filter((producto) =>
-                        producto.nombre
-                          .toLowerCase()
-                          .includes(this.filterText.toLowerCase())
-                      )
-                      .map((producto) => this.#renderCard(producto))
-                      .join("")}
+                    ${this.products.map(producto => this.#renderCard(producto)).join('')}
                 </div>
             </section>
-        `;
-  }
-
-  #agregaEstilo(shadow) {
-    let link = document.createElement("link");
-    link.setAttribute("rel", "stylesheet");
-    link.setAttribute("href", "./src/pages/search/search.page.css");
-    shadow.appendChild(link);
-  }
-
-  #renderCard(product) {
-    return `
-			<product-search id="${product.id}" nombre="${product.nombre}" descripcion="${product.descripcion}" precio="${product.precio}" categoria="${product.categoria}"></product-search>
 		`;
-  }
+    }
+
+    #agregaEstilo(shadow) {
+        let link = document.createElement("link");
+        link.setAttribute("rel", "stylesheet");
+        link.setAttribute("href", "./src/pages/search/search.page.css");
+        shadow.appendChild(link);
+    }
+
+    #renderCard(product) {
+        return `
+			<product-search id="${product.id}" nombre="${product.nombre}" descripcion="${product.descripcion}" precio="${product.precio}" categoria="${product.categoria}"></product-search>
+		`
+    }
 }
