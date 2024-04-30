@@ -16,6 +16,15 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/:nombre&:categorias', async (req, res, next) => {
+    try {
+        const productosFiltrados = await ProductoDAO.filterProductosByNombreAndCategorias(req.params.nombre, req.params.categorias);
+        res.json(productosFiltrados);
+    } catch (error) {
+        next(new ErrorHandler(500, error.message));
+    }
+});
+
 router.get('/:id', [
     check('id').isNumeric().withMessage('El id debe ser numérico'),
     validarCampos

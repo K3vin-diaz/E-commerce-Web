@@ -59,16 +59,30 @@ export class HeaderComponent extends HTMLElement {
         const searchButton = shadow.getElementById('search-button');
 
         searchButton.addEventListener('click', () => {
+            const busqueda = searchInput.value;
             navigateTo('/views/search');
             this.#changeToUser('LoanWeefos', shadow);
             this.#handleLinkClick("/views/search", shadow);
+            const buscarEvento = new CustomEvent('buscarEvento', {
+                bubbles: true,
+                detail: { busqueda }
+            });
+    
+            window.dispatchEvent(buscarEvento);
         });
 
         searchInput.addEventListener('keypress', (event) => {
+            const busqueda = searchInput.value;
             if (event.key === 'Enter') {
                 navigateTo('/views/search');
                 this.#changeToUser('LoanWeefos', shadow);
                 this.#handleLinkClick("/views/search", shadow);
+                const buscarEvento = new CustomEvent('buscarEvento', {
+                    bubbles: true,
+                    detail: { busqueda }
+                });
+                
+                window.dispatchEvent(buscarEvento);
             }
         });
     }

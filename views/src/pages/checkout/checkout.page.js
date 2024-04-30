@@ -1,5 +1,8 @@
 import { SessionStorageService } from "../../services/SessionStorage.service.js";
 import { CookieService } from "../../services/Cookie.service.js";
+import * as ordenFetch from '../../../../fetch-api/ordenFetch.js';
+import * as ordenProductoFetch from '../../../../fetch-api/ordenproductoFetch.js';
+import * as productoFetch from '../../../../fetch-api/productoFetch.js';
 
 export class CheckoutPage extends HTMLElement {
 
@@ -18,7 +21,7 @@ export class CheckoutPage extends HTMLElement {
             <div class="checkout">
                 <div class="titulos">
                     <h1>Método de pago</h1>
-                    <h2>Total: ${SessionStorageService.getItem('total')}</h2>
+                    <h2>Total: $${SessionStorageService.getItem('total')}</h2>
                 </div>
                 <div class="checkout-form">
                     <div class="input-group">
@@ -59,12 +62,40 @@ export class CheckoutPage extends HTMLElement {
     }
 
     #pagarCarritoHandler() {
-        CookieService.deleteCookie('ProductsInCart');
+        const fechaActual = new Date().toISOString().split('T')[0];
+        const productosEnCarrito = CookieService.getProductsInCart();
 
+        const ordenId = 1;
+        const fechaOrden = fechaActual;
+        
         const pagarCarritoEvento = new CustomEvent('pagarCarrito', {
             bubbles: true
         });
-
         window.dispatchEvent(pagarCarritoEvento);
+
+        CookieService.deleteCookie('ProductsInCart');
+
+        ordenFetch.crearOrden(fechaOrden, ordenId)
+            .then(orden => {
+                productosEnCarrito.forEach(producto => {
+                    let productoConsultado;
+                    productoFetch.obtenerProductoPorId(producto)
+                        .then(producto => {
+                            productoConsultado = producto;
+                            const cantidad = 1;
+                            const subtotal = productoConsultado.precio * cantidad;
+                            ordenProductoFetch.crearProductoDeOrden(orden.id, producto.id, cantidad, subtotal, productoConsultado.precio * 1)
+                                .then(ordenProducto => {
+                                    console.log(orden.id, producto.id, cantidad, subtotal, productoConsultado.precio * 1);
+                                })
+                                .catch(error => {
+                                    console.error('Error al crear ordenProducto:', error);
+                                });
+                        })
+                });
+            })
+            .catch(error => {
+                console.error('Error al crear la orden:', error);
+            });
     }
 }

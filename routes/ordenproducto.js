@@ -38,7 +38,7 @@ router.post('/', [
 ], async (req, res, next) => {
     try {
         const nuevoOrdenProducto = await OrdenProductoDAO.createOrdenProducto(req.body.idOrden, req.body.idProducto, req.body.cantidadVendida, req.body.subtotal, req.body.precioVenta);
-        res.status(201).json(nuevoOrdenProducto);
+        res.json(nuevoOrdenProducto);
     } catch (error) {
         next(new ErrorHandler(500, error.message));
     }

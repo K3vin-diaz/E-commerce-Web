@@ -18,7 +18,7 @@ export class ProductPage extends HTMLElement {
     #render(shadow) {
         shadow.innerHTML += `
             <div class="aviso" id="aviso">
-                <h1>Se agrego al carrito de compras</h1>
+                <h1>Se agregó al carrito de compras</h1>
             </div>
             <div class="contenido">
                 <div class="nombre">

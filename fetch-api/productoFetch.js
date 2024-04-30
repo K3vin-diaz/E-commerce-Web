@@ -15,6 +15,16 @@ export const obtenerTodosLosProductos = async () => {
     }
 };
 
+export const obtenerProductosFiltrados = async (nombre, categorias) => {
+    try {
+        const respuesta = await fetch(`http://localhost:3000/api/producto/${nombre}&${categorias}`);
+        manejarErrores(respuesta);
+        return await respuesta.json();
+    } catch (error) {
+        console.error('Error al obtener productos filtrados:', error);
+    }
+};
+
 export const obtenerProductoPorId = async (id) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/producto/${id}`);

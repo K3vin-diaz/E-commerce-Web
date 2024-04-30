@@ -1,12 +1,11 @@
-
-const manejarErrores = (response) => {
+export const manejarErrores = (response) => {
     if (!response.ok) {
         throw Error(response.statusText);
     }
     return response;
 };
 
-const obtenerTodosLosProductosDeOrden = async () => {
+export const obtenerTodosLosProductosDeOrden = async () => {
     try {
         const respuesta = await fetch('http://localhost:3000/api/ordenproducto');
         manejarErrores(respuesta);
@@ -16,7 +15,7 @@ const obtenerTodosLosProductosDeOrden = async () => {
     }
 };
 
-const obtenerProductoDeOrdenPorId = async (id) => {
+export const obtenerProductoDeOrdenPorId = async (id) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/ordenproducto/${id}`);
         manejarErrores(respuesta);
@@ -26,7 +25,7 @@ const obtenerProductoDeOrdenPorId = async (id) => {
     }
 };
 
-const crearProductoDeOrden = async (idOrden, idProducto, cantidadVendida, subtotal, precioVenta) => {
+export const crearProductoDeOrden = async (idOrden, idProducto, cantidadVendida, subtotal, precioVenta) => {
     try {
         const respuesta = await fetch('http://localhost:3000/api/ordenproducto', {
             method: 'POST',
@@ -42,7 +41,7 @@ const crearProductoDeOrden = async (idOrden, idProducto, cantidadVendida, subtot
     }
 };
 
-const actualizarProductoDeOrden = async (id, idOrden, idProducto, cantidadVendida, subtotal, precioVenta) => {
+export const actualizarProductoDeOrden = async (id, idOrden, idProducto, cantidadVendida, subtotal, precioVenta) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/ordenproducto/${id}`, {
             method: 'PUT',
@@ -58,7 +57,7 @@ const actualizarProductoDeOrden = async (id, idOrden, idProducto, cantidadVendid
     }
 };
 
-const eliminarProductoDeOrden = async (id) => {
+export const eliminarProductoDeOrden = async (id) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/ordenproducto/${id}`, {
             method: 'DELETE'
@@ -68,12 +67,4 @@ const eliminarProductoDeOrden = async (id) => {
     } catch (error) {
         console.error('Error al eliminar el producto de orden:', error);
     }
-};
-
-module.exports = {
-    obtenerTodosLosProductosDeOrden,
-    obtenerProductoDeOrdenPorId,
-    crearProductoDeOrden,
-    actualizarProductoDeOrden,
-    eliminarProductoDeOrden
 };

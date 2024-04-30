@@ -1,4 +1,5 @@
-const { Producto } = require('../models'); // Ajusta la ruta según la ubicación de tu modelo
+const { Producto } = require('../models');
+const { Op } = require('sequelize');
 
 class ProductoDAO {
   static async getAllProductos() {
@@ -9,6 +10,31 @@ class ProductoDAO {
       throw new Error(`Error al obtener todos los productos: ${error.message}`);
     }
   }
+
+  static async filterProductosByNombreAndCategorias(nombre, categorias) {
+    try {
+      const filtro = {};
+      if (nombre && nombre !== "DEFAULT") {
+        filtro.nombre = { [Op.like]: `%${nombre}%` };
+      }
+
+      if (categorias) {
+        const categoriasArray = categorias.split(',').map(c => parseInt(c.trim()));
+        if (categoriasArray.length > 0) {
+          filtro.idCategoria = { [Op.or]: categoriasArray };
+        }
+      }
+
+      const productos = await Producto.findAll({
+        where: filtro
+      });
+
+      return productos;
+    } catch (error) {
+      throw new Error(`Error al filtrar productos por nombre y categorías: ${error.message}`);
+    }
+  }
+
 
   static async getProductoById(id) {
     try {

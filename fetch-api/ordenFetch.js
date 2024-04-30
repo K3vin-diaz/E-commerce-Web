@@ -1,12 +1,11 @@
-
-const manejarErrores = (response) => {
+export const manejarErrores = (response) => {
     if (!response.ok) {
         throw Error(response.statusText);
     }
     return response;
 };
 
-const obtenerTodasLasOrdenes = async () => {
+export const obtenerTodasLasOrdenes = async () => {
     try {
         const respuesta = await fetch('http://localhost:3000/api/orden');
         manejarErrores(respuesta);
@@ -16,7 +15,7 @@ const obtenerTodasLasOrdenes = async () => {
     }
 };
 
-const obtenerOrdenPorId = async (id) => {
+export const obtenerOrdenPorId = async (id) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/orden/${id}`);
         manejarErrores(respuesta);
@@ -26,7 +25,7 @@ const obtenerOrdenPorId = async (id) => {
     }
 };
 
-const crearOrden = async (fecha, idCuenta) => {
+export const crearOrden = async (fecha, idCuenta) => {
     try {
         const respuesta = await fetch('http://localhost:3000/api/orden', {
             method: 'POST',
@@ -42,7 +41,7 @@ const crearOrden = async (fecha, idCuenta) => {
     }
 };
 
-const actualizarOrden = async (id, fecha, idCuenta) => {
+export const actualizarOrden = async (id, fecha, idCuenta) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/orden/${id}`, {
             method: 'PUT',
@@ -58,7 +57,7 @@ const actualizarOrden = async (id, fecha, idCuenta) => {
     }
 };
 
-const eliminarOrden = async (id) => {
+export const eliminarOrden = async (id) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/orden/${id}`, {
             method: 'DELETE'
@@ -68,11 +67,4 @@ const eliminarOrden = async (id) => {
     } catch (error) {
         console.error('Error al eliminar la orden:', error);
     }
-};
-module.exports = {
-    obtenerTodasLasOrdenes,
-    obtenerOrdenPorId,
-    crearOrden,
-    actualizarOrden,
-    eliminarOrden
 };
