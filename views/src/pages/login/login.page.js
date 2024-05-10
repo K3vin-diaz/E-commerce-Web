@@ -1,4 +1,5 @@
 import { SessionStorageService } from "../../services/SessionStorage.service.js";
+import * as cuentaFetch from '../../../../fetch-api/cuentaFetch.js';
 
 export class LoginPage extends HTMLElement {
 
@@ -10,6 +11,7 @@ export class LoginPage extends HTMLElement {
     connectedCallback() {
         this.#agregaEstilo(this.shadow);
         this.#render(this.shadow);
+        this.shadow.querySelector('button').addEventListener('click', this.#iniciarSesion.bind(this));
     }
 
     #render(shadow) {
@@ -29,6 +31,19 @@ export class LoginPage extends HTMLElement {
                 <button>Iniciar</button>
             </div>
 		`;
+    }
+
+    #iniciarSesion() {
+        const username = this.shadow.querySelector('#username').value;
+        const password = this.shadow.querySelector('#password').value;
+        cuentaFetch.iniciarSesion(username, password)
+            .then(response => {
+                SessionStorageService.setItem('token', response.token);
+                console.log('Respuesta del servidor:', response);
+            })
+            .catch(error => {
+                console.error('Error al iniciar sesión:', error);
+            });
     }
 
     #agregaEstilo(shadow) {

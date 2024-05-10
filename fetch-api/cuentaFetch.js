@@ -5,8 +5,38 @@ const manejarErrores = (response) => {
     }
     return response;
 };
+export const iniciarSesion = async (username, password) => {
+    try {
+        const respuesta = await fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+        manejarErrores(respuesta);
+        return await respuesta.json();
+    } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+    }
+};
+export const registrar = async (username, email, password) => {
+    try {
+        const respuesta = await fetch('http://localhost:3000/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, email, password })
+        });
+        manejarErrores(respuesta);
+        return await respuesta.json();
+    } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+    }
+};
 
-const obtenerTodasLasCuentas = async () => {
+export const obtenerTodasLasCuentas = async () => {
     try {
         const respuesta = await fetch('http://localhost:3000/api/cuenta');
         manejarErrores(respuesta);
@@ -16,7 +46,7 @@ const obtenerTodasLasCuentas = async () => {
     }
 };
 
-const obtenerCuentaPorId = async (id) => {
+export const obtenerCuentaPorId = async (id) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/cuenta/${id}`);
         manejarErrores(respuesta);
@@ -26,7 +56,7 @@ const obtenerCuentaPorId = async (id) => {
     }
 };
 
-const crearCuenta = async (usuario, email, password) => {
+export const crearCuenta = async (usuario, email, password) => {
     try {
         const respuesta = await fetch('http://localhost:3000/api/cuenta', {
             method: 'POST',
@@ -42,7 +72,7 @@ const crearCuenta = async (usuario, email, password) => {
     }
 };
 
-const actualizarCuenta = async (id, usuario, email, password) => {
+export const actualizarCuenta = async (id, usuario, email, password) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/cuenta/${id}`, {
             method: 'PUT',
@@ -58,7 +88,7 @@ const actualizarCuenta = async (id, usuario, email, password) => {
     }
 };
 
-const eliminarCuenta = async (id) => {
+export const eliminarCuenta = async (id) => {
     try {
         const respuesta = await fetch(`http://localhost:3000/api/cuenta/${id}`, {
             method: 'DELETE'
@@ -68,12 +98,4 @@ const eliminarCuenta = async (id) => {
     } catch (error) {
         console.error('Error al eliminar la cuenta:', error);
     }
-};
-
-module.exports = {
-    obtenerTodasLasCuentas,
-    obtenerCuentaPorId,
-    crearCuenta,
-    actualizarCuenta,
-    eliminarCuenta
 };
