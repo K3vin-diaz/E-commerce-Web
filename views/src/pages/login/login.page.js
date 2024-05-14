@@ -20,7 +20,7 @@ export class LoginPage extends HTMLElement {
                 <h1>Iniciar sesión</h1>
                 <div class="login-form">
                     <div class="input-group">
-                        <label for="username">Usuario / Correo</label>
+                        <label for="username">Usuario</label>
                         <input type="text" id="username">
                     </div>
                     <div class="input-group">
@@ -36,13 +36,30 @@ export class LoginPage extends HTMLElement {
     #iniciarSesion() {
         const username = this.shadow.querySelector('#username').value;
         const password = this.shadow.querySelector('#password').value;
+
+        if (username === '') {
+            alert('Por favor, introduce un nombre de usuario.');
+            return;
+        }
+        if (password === '') {
+            alert('Por favor, introduce una contraseña.');
+            return;
+        }
         cuentaFetch.iniciarSesion(username, password)
             .then(response => {
                 SessionStorageService.setItem('token', response.token);
-                console.log('Respuesta del servidor:', response);
+                
+                alert('Ingresaste correctamente!');
+                const loginEvento = new CustomEvent('loginEvento', {
+                    bubbles: true,
+                    detail: { username }
+                });
+                
+                window.dispatchEvent(loginEvento);
+                navigateTo('/views/');
             })
             .catch(error => {
-                console.error('Error al iniciar sesión:', error);
+                alert('Usuario o contraseña incorrectos.');
             });
     }
 

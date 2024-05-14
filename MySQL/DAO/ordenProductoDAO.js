@@ -1,4 +1,4 @@
-const { OrdenProducto } = require('../models'); 
+const { OrdenProducto } = require('../models');
 
 class OrdenProductoDAO {
   static async getAllOrdenProductos() {
@@ -13,6 +13,20 @@ class OrdenProductoDAO {
   static async getOrdenProductoById(id) {
     try {
       const ordenProducto = await OrdenProducto.findByPk(id);
+      return ordenProducto;
+    } catch (error) {
+      throw new Error(`Error al obtener el producto de la orden por ID: ${error.message}`);
+    }
+  }
+
+  static async getOrdenProductoByOrden(ordenId) {
+    try {
+      const ordenProducto = await OrdenProducto.findAll({
+        order: ["createdAt"],
+        where: {
+          idorden: ordenId
+        }
+      });
       return ordenProducto;
     } catch (error) {
       throw new Error(`Error al obtener el producto de la orden por ID: ${error.message}`);

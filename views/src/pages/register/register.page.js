@@ -79,14 +79,21 @@ export class RegisterPage extends HTMLElement {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
-        
+
         cuentaFetch.registrar(username, email, password)
             .then(response => {
                 SessionStorageService.setItem('token', response.token);
-                console.log('Respuesta del servidor:', response);
+                alert('Regitrado correctamente!');
+                const loginEvento = new CustomEvent('loginEvento', {
+                    bubbles: true,
+                    detail: { username }
+                });
+                
+                window.dispatchEvent(loginEvento);
+                navigateTo('/views/');
             })
             .catch(error => {
-                console.error('Error en el registro:', error);
+                alert('Error en el registro: correo repetido');
             });
     }
 

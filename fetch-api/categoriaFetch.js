@@ -1,3 +1,4 @@
+import { SessionStorageService } from "../views/src/services/SessionStorage.service.js";
 
 const manejarErrores = (response) => {
     if (!response.ok) {
@@ -8,7 +9,12 @@ const manejarErrores = (response) => {
 
 const obtenerTodasLasCategorias = async () => {
     try {
-        const respuesta = await fetch('http://localhost:3000/api/categoria');
+        const token = SessionStorageService.getItem('token');
+        const respuesta = await fetch('http://localhost:3000/api/categoria', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         manejarErrores(respuesta);
         return await respuesta.json();
     } catch (error) {
@@ -18,7 +24,12 @@ const obtenerTodasLasCategorias = async () => {
 
 const obtenerCategoriaPorId = async (id) => {
     try {
-        const respuesta = await fetch(`http://localhost:3000/api/categoria/${id}`);
+        const token = SessionStorageService.getItem('token');
+        const respuesta = await fetch(`http://localhost:3000/api/categoria/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         manejarErrores(respuesta);
         return await respuesta.json();
     } catch (error) {
@@ -28,10 +39,12 @@ const obtenerCategoriaPorId = async (id) => {
 
 const crearCategoria = async (nombre, descripcion) => {
     try {
+        const token = SessionStorageService.getItem('token');
         const respuesta = await fetch('http://localhost:3000/api/categoria', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ nombre, descripcion })
         });
@@ -44,10 +57,12 @@ const crearCategoria = async (nombre, descripcion) => {
 
 const actualizarCategoria = async (id, nombre, descripcion) => {
     try {
+        const token = SessionStorageService.getItem('token');
         const respuesta = await fetch(`http://localhost:3000/api/categoria/${id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ nombre, descripcion })
         });
@@ -60,8 +75,12 @@ const actualizarCategoria = async (id, nombre, descripcion) => {
 
 const eliminarCategoria = async (id) => {
     try {
+        const token = SessionStorageService.getItem('token');
         const respuesta = await fetch(`http://localhost:3000/api/categoria/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
         manejarErrores(respuesta);
         return { message: 'Categoría eliminada' };

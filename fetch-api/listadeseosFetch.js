@@ -1,3 +1,4 @@
+import { SessionStorageService } from "../views/src/services/SessionStorage.service.js";
 
 const manejarErrores = (response) => {
     if (!response.ok) {
@@ -8,7 +9,12 @@ const manejarErrores = (response) => {
 
 const obtenerTodasLasListasDeseos = async () => {
     try {
-        const respuesta = await fetch('http://localhost:3000/api/listadeseos');
+        const token = SessionStorageService.getItem('token');
+        const respuesta = await fetch('http://localhost:3000/api/listadeseos', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         manejarErrores(respuesta);
         return await respuesta.json();
     } catch (error) {
@@ -18,7 +24,12 @@ const obtenerTodasLasListasDeseos = async () => {
 
 const obtenerListaDeseosPorId = async (id) => {
     try {
-        const respuesta = await fetch(`http://localhost:3000/api/listadeseos/${id}`);
+        const token = SessionStorageService.getItem('token');
+        const respuesta = await fetch(`http://localhost:3000/api/listadeseos/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         manejarErrores(respuesta);
         return await respuesta.json();
     } catch (error) {
@@ -28,10 +39,12 @@ const obtenerListaDeseosPorId = async (id) => {
 
 const crearListaDeseos = async (idCuenta, idProducto) => {
     try {
+        const token = SessionStorageService.getItem('token');
         const respuesta = await fetch('http://localhost:3000/api/listadeseos', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ idCuenta, idProducto })
         });
@@ -44,10 +57,12 @@ const crearListaDeseos = async (idCuenta, idProducto) => {
 
 const actualizarListaDeseos = async (id, idCuenta, idProducto) => {
     try {
+        const token = SessionStorageService.getItem('token');
         const respuesta = await fetch(`http://localhost:3000/api/listadeseos/${id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ idCuenta, idProducto })
         });
@@ -60,8 +75,12 @@ const actualizarListaDeseos = async (id, idCuenta, idProducto) => {
 
 const eliminarListaDeseos = async (id) => {
     try {
+        const token = SessionStorageService.getItem('token');
         const respuesta = await fetch(`http://localhost:3000/api/listadeseos/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
         manejarErrores(respuesta);
         return { message: 'Lista de deseos eliminada' };

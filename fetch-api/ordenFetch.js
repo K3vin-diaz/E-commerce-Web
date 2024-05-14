@@ -1,3 +1,5 @@
+import { SessionStorageService } from "../views/src/services/SessionStorage.service.js";
+
 export const manejarErrores = (response) => {
     if (!response.ok) {
         throw Error(response.statusText);
@@ -7,7 +9,12 @@ export const manejarErrores = (response) => {
 
 export const obtenerTodasLasOrdenes = async () => {
     try {
-        const respuesta = await fetch('http://localhost:3000/api/orden');
+        const token = SessionStorageService.getItem('token');
+        const respuesta = await fetch('http://localhost:3000/api/orden', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         manejarErrores(respuesta);
         return await respuesta.json();
     } catch (error) {
@@ -17,7 +24,27 @@ export const obtenerTodasLasOrdenes = async () => {
 
 export const obtenerOrdenPorId = async (id) => {
     try {
-        const respuesta = await fetch(`http://localhost:3000/api/orden/${id}`);
+        const token = SessionStorageService.getItem('token');
+        const respuesta = await fetch(`http://localhost:3000/api/orden/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        manejarErrores(respuesta);
+        return await respuesta.json();
+    } catch (error) {
+        console.error('Error al obtener la orden por ID:', error);
+    }
+};
+
+export const obtenerOrdenPorCuenta = async (idCuenta) => {
+    try {
+        const token = SessionStorageService.getItem('token');
+        const respuesta = await fetch(`http://localhost:3000/api/orden/cuenta/${idCuenta}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         manejarErrores(respuesta);
         return await respuesta.json();
     } catch (error) {
@@ -27,10 +54,12 @@ export const obtenerOrdenPorId = async (id) => {
 
 export const crearOrden = async (fecha, idCuenta) => {
     try {
+        const token = SessionStorageService.getItem('token');
         const respuesta = await fetch('http://localhost:3000/api/orden', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ fecha, idCuenta })
         });
@@ -43,10 +72,12 @@ export const crearOrden = async (fecha, idCuenta) => {
 
 export const actualizarOrden = async (id, fecha, idCuenta) => {
     try {
+        const token = SessionStorageService.getItem('token');
         const respuesta = await fetch(`http://localhost:3000/api/orden/${id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ fecha, idCuenta })
         });
@@ -59,8 +90,12 @@ export const actualizarOrden = async (id, fecha, idCuenta) => {
 
 export const eliminarOrden = async (id) => {
     try {
+        const token = SessionStorageService.getItem('token');
         const respuesta = await fetch(`http://localhost:3000/api/orden/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
         manejarErrores(respuesta);
         return { message: 'Orden eliminada' };

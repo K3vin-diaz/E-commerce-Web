@@ -19,6 +19,20 @@ class OrdenDAO {
     }
   }
 
+  static async getAllOrdenesCuenta(id) {
+    try {
+      const orden = await Orden.findAll({
+        order: ["createdAt"],
+        where: {
+          idcuenta: id
+        }
+      });
+      return orden;
+    } catch (error) {
+      throw new Error(`Error al obtener la orden por ID: ${error.message}`);
+    }
+  }
+
   static async createOrden(fecha, idCuenta) {
     try {
       const nuevaOrden = await Orden.create({ fecha, idcuenta: idCuenta });

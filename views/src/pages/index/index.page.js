@@ -1,3 +1,5 @@
+import { SessionStorageService } from "../../services/SessionStorage.service.js";
+
 export class IndexPage extends HTMLElement {
 
     constructor() {
@@ -23,12 +25,13 @@ export class IndexPage extends HTMLElement {
                     <p>Nuevo modelo</p>
                 </div>
                 <div class="boton-detalles">
-                    <button class="ver-detalles" id="btn1">Ver detalles</button>
+                    <a href="/views/product" button class="ver-detalles" id="btn3">Ver detalles</a>
                 </div>
             </div>
             <product-index producto-Id="1" version="1"></product-index>
-            <product-index producto-Id="3" version="2"></product-index>
+            <product-index producto-Id="2" version="2"></product-index>
 		`;
+        shadow.getElementById(`btn3`).addEventListener('click', () => this.#guardarProducto(3));
     }
 
     #agregaEstilo(shadow) {
@@ -60,6 +63,10 @@ export class IndexPage extends HTMLElement {
             }
         });
     }
+
+    #guardarProducto(id) {
+        SessionStorageService.setItem('producto', id);
+    }
 }
 
 window.onload = function () {
@@ -77,7 +84,7 @@ function resizeBanner() {
         var img = shadowRoot.getElementById('banner-img');
         var imgDetail = shadowRoot.getElementById('detail-img');
         var imgHeight = img.clientHeight;
-        var bannerHeight = imgHeight - (imgHeight/4)
+        var bannerHeight = imgHeight - (imgHeight / 4)
         banner.style.height = bannerHeight + 'px';
         imgDetail.style.height = imgHeight + 'px';
     }

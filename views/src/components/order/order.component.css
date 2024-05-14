@@ -1,0 +1,86 @@
+.tarjeta {
+    display: flex;
+    height: 15vh;
+    padding: 2% 0;
+}
+
+.imagen-container {
+    position: relative;
+    width: 40%;
+    height: 100%;
+    margin: 0 2% 0 0;
+    padding: 0;
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.info {
+    display: flex;
+    width: 100%;
+    height: 15vh;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#id {
+    color: #d9f27e;
+    font-size: 3vw;
+    margin: 0;
+    font-weight: bold;
+}
+
+#fecha, #total {
+    color: white;
+    font-size: 3vw;
+    margin: 0;
+    font-weight: bold;
+    font-family: 'Subtitulos';
+}
+
+.ver-detalles {
+    padding: 10px 10%;
+    font-family: 'Subtitulos';
+    font-size: 1.3vw;
+    color: white;
+    background-color: #5271FF;
+    border: none;
+    border-radius: 10px;
+    margin-top: 2%;
+    width: 100%;
+    text-decoration: none;
+}
+
+.boton-detalles a:active {
+    background-color: #272727;
+    border: white 1px solid;
+}
+
+.orden{
+    padding: 0 10%;
+}
+
+.orden:hover{
+    background-color: white;
+    cursor: pointer;
+}
+
+.orden:hover #fecha,
+.orden:hover #total {
+    color: black;
+}
+
+.orden:hover #id {
+    color: #5271FF;
+}
+
+.salto {
+    border-bottom: 1px solid #5271FF;
+    width: 100%;
+    height: 1px;
+    display: block;
+}

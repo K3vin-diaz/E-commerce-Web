@@ -16,6 +16,8 @@ export class ProductPage extends HTMLElement {
     }
 
     #render(shadow) {
+        const productoId = SessionStorageService.getItem('producto');
+        const img = './src/assets/images/'+ productoId + ".jpg"
         shadow.innerHTML += `
             <div class="aviso" id="aviso">
                 <h1>Se agregó al carrito de compras</h1>
@@ -28,19 +30,24 @@ export class ProductPage extends HTMLElement {
                     <h1 id="precio">...</h1>
                 </div>
                 <div class="img">
-                    <img src="./src/assets/images/banner.png">
+                    <img src=${img}>
                 </div>
                 <div class="descripcion">
                     <h1 id="descripcion">...</h1>
                 </div>
                 <div class="botones">
                     <button class="comprar" id="comprar">Comprar</button>
-                    <button class="boton-icono"><img src="./src/assets/images/heart.png"></button>
+                    <button class="boton-icono" id="i${productoId}"><img src="./src/assets/images/heart.png"></button>
                 </div>
+                <button class="floating-button" onclick="navigateTo('/views/')">Regresar</button>
             </div>
 		`;
-
-        shadow.getElementById(`comprar`).addEventListener('click', () => this.#addToCartHandler(shadow, SessionStorageService.getItem("producto")));
+        if (!SessionStorageService.getItem('token')) {
+            shadow.getElementById(`i${productoId}`).remove();
+            shadow.getElementById('comprar').remove();
+        } else {
+            shadow.getElementById(`comprar`).addEventListener('click', () => this.#addToCartHandler(shadow, SessionStorageService.getItem("producto")));
+        }
     }
 
     #agregaEstilo(shadow) {

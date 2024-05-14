@@ -1,0 +1,120 @@
+@font-face {
+    font-family: 'Titulos';
+    src: url('src/assets/fonts/LeagueSpartan-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Subtitulos';
+    src: url('src/assets/fonts/Ablation.otf') format('truetype');
+}
+
+body {
+    font-family: 'Titulos';
+    margin: 0;
+    padding: 0;
+    background-color: #272727;
+}
+
+.cart-container{
+    margin: 2% 5% 5% 5%;
+}
+
+.cart-container h1 {
+    color: white;
+    font-size: 5vw;
+    margin: 0;
+}
+
+.pedidos{
+    display: flex;
+}
+
+.boton {
+    display: flex;
+    width: 20%;
+    padding: 2%;
+    text-align: center;
+    flex-direction: column;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px;
+}
+
+.lista {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+button {
+    padding: 10px 10%;
+    font-family: 'Subtitulos';
+    font-size: 2vw;
+    color: white;
+    background-color: #f26398;
+    border: none;
+    border-radius: 10px;
+    width: auto;
+    align-self: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px;
+}
+
+button:active {
+    background-color:  #272727;
+    border: white 1px solid;
+}
+
+.total{
+    padding-top: 5%;
+    font-family: 'Subtitulos';
+}
+
+.total h1{
+    font-size: 3vw;
+    text-align: right;
+}
+
+#aviso{
+    display: none;
+    font-size: 3vw;
+    font-family: 'Subtitulos';
+    padding-top: 5%;
+}
+
+.aviso2{
+    display: none;
+    width: 100%;
+    background-color: #5271FF;
+}
+
+.aviso2 h1{
+    color: white;
+    font-size: 3vw;
+    text-align: center;
+    padding: 2% 0;
+    margin: 0;
+}
+
+.floating-button {
+    position: fixed;
+    bottom: -70%;
+    right: 20px;
+    padding: 15px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #5271FF;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s;
+    font-family: 'Subtitulos';
+}
+
+.floating-button:hover {
+    background-color: #405bb5;
+}

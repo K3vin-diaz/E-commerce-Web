@@ -17,7 +17,7 @@ body {
 
 .banner {
     width: 100%;
-    
+
 }
 
 #banner-img {
@@ -73,9 +73,10 @@ body {
     background-color: #5271FF;
     border: none;
     border-radius: 20px;
+    text-decoration: none;
 }
 
-.boton-detalles button:active {
+.boton-detalles a:active {
     background-color: #272727;
     border: white 1px solid;
 }

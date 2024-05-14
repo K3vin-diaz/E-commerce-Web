@@ -1,5 +1,6 @@
 import { CookieService } from "../../services/Cookie.service.js";
 import { SessionStorageService } from "../../services/SessionStorage.service.js";
+import * as cuentaFetch from '../../../../fetch-api/cuentaFetch.js';
 
 export class HeaderComponent extends HTMLElement {
     constructor() {
@@ -9,10 +10,11 @@ export class HeaderComponent extends HTMLElement {
     connectedCallback() {
         const shadow = this.attachShadow({ mode: "open" });
         this.cart = null;
-        this.#addStyles(shadow);
-        this.#render(shadow);
         window.addEventListener('addToCart', (event) => this.#addToCartHandler(shadow, event.detail.product));
         window.addEventListener('pagarCarrito', () => this.#vaciarCarro(shadow));
+        window.addEventListener('loginEvento', (event) => this.#changeToUser(event.detail.username, shadow));
+
+        this.#verificarUsuario(shadow);
 
         const links = shadow.querySelectorAll('.links');
         links.forEach(link => {
@@ -61,13 +63,12 @@ export class HeaderComponent extends HTMLElement {
         searchButton.addEventListener('click', () => {
             const busqueda = searchInput.value;
             navigateTo('/views/search');
-            this.#changeToUser('LoanWeefos', shadow);
             this.#handleLinkClick("/views/search", shadow);
             const buscarEvento = new CustomEvent('buscarEvento', {
                 bubbles: true,
                 detail: { busqueda }
             });
-    
+
             window.dispatchEvent(buscarEvento);
         });
 
@@ -75,13 +76,12 @@ export class HeaderComponent extends HTMLElement {
             const busqueda = searchInput.value;
             if (event.key === 'Enter') {
                 navigateTo('/views/search');
-                this.#changeToUser('LoanWeefos', shadow);
                 this.#handleLinkClick("/views/search", shadow);
                 const buscarEvento = new CustomEvent('buscarEvento', {
                     bubbles: true,
                     detail: { busqueda }
                 });
-                
+
                 window.dispatchEvent(buscarEvento);
             }
         });
@@ -126,10 +126,19 @@ export class HeaderComponent extends HTMLElement {
                 registroElement.classList.add('selec');
                 break;
             case "/views/search":
-                userElement.classList.add('selec');
+                if (userElement) {
+                    userElement.classList.add('selec');
+                } else {
+                    registroElement.classList.add('selec');
+                }
                 break;
             case "/views/cart":
                 cartElement.classList.add('selec');
+                break;
+            case "/views/history":
+                if (userElement) {
+                    userElement.classList.add('selec');
+                }
                 break;
             default:
                 break;
@@ -137,6 +146,7 @@ export class HeaderComponent extends HTMLElement {
     }
 
     #changeToUser(user, shadow) {
+        this.#handleLinkClick("/views/", shadow);
         const count = CookieService.getProductsInCart().length;
         const cont = shadow.getElementById("extraContainer");
         cont.innerHTML = '';
@@ -146,9 +156,9 @@ export class HeaderComponent extends HTMLElement {
             <div class="userContent" id="userContent">
                 <h1 id="user">${user}▼</h1>
                 <ul>
-                    <li><a href="/">Lista<br>de deseos</a></li>
-                    <li><a href="/">Historial<br>de pedidos</a></li>
-                    <li><a href="/views/">Cerrar sesión</a></li>
+                    <li><a href="/views" id="lista">Lista<br>de deseos</a></li>
+                    <li><a href="/views/history" id="history">Historial<br>de pedidos</a></li>
+                    <li><a href="/views" id="cerrar">Cerrar sesión</a></li>
                 </ul>
             </div>
         `;
@@ -158,12 +168,43 @@ export class HeaderComponent extends HTMLElement {
             this.#handleLinkClick(href, shadow);
         });
 
-        
+        shadow.getElementById("cerrar").addEventListener('click', (event) => {
+            SessionStorageService.removeItem('token');
+            this.#verificarUsuario(shadow);
+        });
+
+        shadow.getElementById("history").addEventListener('click', (event) => {
+            const href = shadow.getElementById("history").getAttribute('href');
+            this.#handleLinkClick(href, shadow);
+        });
+
+        shadow.getElementById("lista").addEventListener('click', (event) => {
+            const href = shadow.getElementById("lista").getAttribute('href');
+            this.#handleLinkClick(href, shadow);
+            alert("No realizado 🥲");
+        });
+
         SessionStorageService.setItem('pago', false);
     }
 
-    #vaciarCarro(shadow){
+    #vaciarCarro(shadow) {
         shadow.getElementById('cart-text').textContent = "Carrito (0)";
-        SessionStorageService.setItem('pago',true);
+        SessionStorageService.setItem('pago', true);
+    }
+
+    #verificarUsuario(shadow) {
+        const token = SessionStorageService.getItem('token');
+        if (token !== 'undefined' && typeof token !== undefined && token !== null) {
+            this.#addStyles(shadow);
+            this.#render(shadow);
+            cuentaFetch.usuario()
+                .then(response => {
+                    this.#changeToUser(response.username, shadow);
+                })
+        } else {
+            shadow.innerHTML = ``;
+            this.#addStyles(shadow);
+            this.#render(shadow);
+        }
     }
 }

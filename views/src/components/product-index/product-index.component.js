@@ -1,4 +1,5 @@
 import * as productoFecth from '../../../../fetch-api/productoFetch.js';
+import { SessionStorageService } from "../../services/SessionStorage.service.js";
 
 export class ProductIndexComponent extends HTMLElement {
     constructor() {
@@ -16,6 +17,7 @@ export class ProductIndexComponent extends HTMLElement {
 
     #render(shadow, productoId, version) {
         if (version === "1") {
+            const img = './src/assets/images/'+ productoId + ".jpg"
             shadow.innerHTML += `
             <section>
                 <div class="tarjeta">
@@ -23,37 +25,40 @@ export class ProductIndexComponent extends HTMLElement {
                         <p id="nombre">...</p>
                         <p id="descripcion">...</p>
                         <p id="precio">...</p>
-                        <div class="boton-detalles">
-                            <button class="ver-detalles" id="btn${productoId}">Ver detalles</button>
-                        </div>
+                        <a href="/views/product" class="ver-detalles" id="btn${productoId}">Ver detalles</a>
                     </div>
                     <div class="imagen-container">
-                        <img src="./src/assets/images/banner.png">
-                        <button class="boton-icono"><img src="./src/assets/images/heart.png"></button>
+                        <img src="${img}">
+                        <button class="boton-icono" id="i${productoId}"><img src="./src/assets/images/heart.png"></button>
                     </div>
                 </div>
             </section>
             `
         } else {
+            const img = './src/assets/images/'+ productoId + ".jpg"
             shadow.innerHTML += `
             <section>
                 <div class="tarjeta">
                     <div class="imagen-container">
-                        <img src="./src/assets/images/banner.png">
-                        <button class="boton-icono"><img src="./src/assets/images/heart.png"></button>
+                        <img src="${img}">
+                        <button class="boton-icono" id="i${productoId}"><img src="./src/assets/images/heart.png"></button>
                     </div>
                     <div class="info">
                         <p id="nombre"  class="version2">...</p>
                         <p id="descripcion"  class="version2">...</p>
                         <p id="precio"  class="version2">...</p>
                         <div class="version2">
-                            <button class="ver-detalles" id="btn${productoId}">Ver detalles</button>
+                            <a href="/views/product" class="ver-detalles" id="btn${productoId}">Ver detalles</a>
                         </div>
                     </div>
                 </div>
             </section>
-            `
+            `;
         }
+        if(!SessionStorageService.getItem('token')){
+            shadow.getElementById(`i${productoId}`).remove();
+        }
+        shadow.getElementById(`btn${productoId}`).addEventListener('click', () => this.#guardarProducto(productoId));
     }
 
     #agregarEstilo(shadow) {
@@ -73,5 +78,9 @@ export class ProductIndexComponent extends HTMLElement {
                 let element3 = shadow.querySelector('#precio');
                 element3.innerHTML = "$" + producto.precio;
             })
+    }
+
+    #guardarProducto(id) {
+        SessionStorageService.setItem('producto', id);
     }
 }

@@ -34,7 +34,7 @@ app.post('/login', async (req, res) => {
             return cuenta.usuario === username || cuenta.email === username;
         });
         if (cuenta && cuenta.password === password) {
-            const user = { username: cuenta.usuario };
+            const user = { username: cuenta.usuario, id: cuenta.id };
             const token = generateToken(user);
             res.json({ token });
         } else {
@@ -69,10 +69,11 @@ app.post('/register', async (req, res) => {
 });
 
 function verifyToken(req, res, next) {
-    const token = req.header('Authorization');
-    if (!token) {
+    const authHeader = req.header('Authorization');
+    if (!authHeader) {
         return res.status(403).json({ error: 'Acceso denegado: Token no proporcionado' });
     }
+    const token = authHeader.split(' ')[1];
     jwt.verify(token, secretKey, (err, user) => {
         if (err) {
             return res.status(403).json({ error: 'Acceso denegado: Token no válido' });
@@ -82,8 +83,20 @@ function verifyToken(req, res, next) {
     });
 }
 
+app.get('/me', verifyToken, (req, res) => {
+    try {
+        res.json(req.user);
+    } catch (error) {
+        res.status(500).json({ error: 'ERROR ' + error.message });
+    }
+});
+
 app.get('/protegido', verifyToken, (req, res) => {
-    res.json({ mensaje: 'Ruta protegida. Usuario autenticado: ' + req.user.username });
+    try {
+        res.json({ mensaje: 'Ruta protegida. Usuario autenticado: ' + req.user.username });
+    } catch (error) {
+        res.status(500).json({ error: 'ERROR ' + error.message });
+    }
 });
 //JWT
 
@@ -92,7 +105,7 @@ app.use('/api/cuenta', verifyToken, cuentaRouter);
 app.use('/api/listadeseos', verifyToken, listadeseosRouter);
 app.use('/api/orden', verifyToken, ordenRouter);
 app.use('/api/ordenproducto', verifyToken, ordenproductoRouter);
-app.use('/api/producto', verifyToken, productoRouter);
+app.use('/api/producto', productoRouter);
 
 app.all('*', (req, res, next) => {
     const error = new AppError(`No se pudo acceder a la ruta: ${req.originalUrl} en el servicio web`);

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const OrdenDAO = require('../MySQL/DAO/ordenDAO'); 
+const OrdenDAO = require('../MySQL/DAO/ordenDAO');
 const { ErrorHandler } = require('../MySQL/middlewares/error-handler');
 const { validarCampos } = require('../MySQL/middlewares/validar-campos');
 const { check } = require('express-validator');
@@ -10,6 +10,18 @@ router.use(validarCampos);
 router.get('/', async (req, res, next) => {
   try {
     const ordenes = await OrdenDAO.getAllOrdenes();
+    res.json(ordenes);
+  } catch (error) {
+    next(new ErrorHandler(500, error.message));
+  }
+});
+
+router.get('/cuenta/:idCuenta', [
+  check('idCuenta').isNumeric().withMessage('El id debe ser numérico'),
+  validarCampos
+], async (req, res, next) => {
+  try {
+    const ordenes = await OrdenDAO.getAllOrdenesCuenta(req.params.idCuenta);
     res.json(ordenes);
   } catch (error) {
     next(new ErrorHandler(500, error.message));

@@ -28,6 +28,18 @@ router.get('/:id', [
     }
 });
 
+router.get('/orden/:ordenId', [
+    check('ordenId').isNumeric().withMessage('El id debe ser numérico'),
+    validarCampos
+], async (req, res, next) => {
+    try {
+        const ordenProducto = await OrdenProductoDAO.getOrdenProductoByOrden(req.params.ordenId);
+        res.json(ordenProducto);
+    } catch (error) {
+        next(new ErrorHandler(500, error.message));
+    }
+});
+
 router.post('/', [
     check('idOrden').isNumeric().withMessage('El id de la orden debe ser numérico'),
     check('idProducto').isNumeric().withMessage('El id del producto debe ser numérico'),

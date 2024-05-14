@@ -8,4 +8,8 @@ export class SessionStorageService{
     static getItem(key){
         return sessionStorage.getItem(key);
     }
+
+    static removeItem(key){
+        return sessionStorage.removeItem(key);
+    }
 }

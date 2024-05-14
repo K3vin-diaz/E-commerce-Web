@@ -1,3 +1,5 @@
+import { SessionStorageService } from "../views/src/services/SessionStorage.service.js";
+
 export const manejarErrores = (response) => {
     if (!response.ok) {
         throw Error(response.statusText);
@@ -7,7 +9,12 @@ export const manejarErrores = (response) => {
 
 export const obtenerTodosLosProductosDeOrden = async () => {
     try {
-        const respuesta = await fetch('http://localhost:3000/api/ordenproducto');
+        const token = SessionStorageService.getItem('token');
+        const respuesta = await fetch('http://localhost:3000/api/ordenproducto', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         manejarErrores(respuesta);
         return await respuesta.json();
     } catch (error) {
@@ -17,7 +24,27 @@ export const obtenerTodosLosProductosDeOrden = async () => {
 
 export const obtenerProductoDeOrdenPorId = async (id) => {
     try {
-        const respuesta = await fetch(`http://localhost:3000/api/ordenproducto/${id}`);
+        const token = SessionStorageService.getItem('token');
+        const respuesta = await fetch(`http://localhost:3000/api/ordenproducto/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        manejarErrores(respuesta);
+        return await respuesta.json();
+    } catch (error) {
+        console.error('Error al obtener el producto de orden por ID:', error);
+    }
+};
+
+export const obtenerProductoDeOrdenPorOrden = async (ordenId) => {
+    try {
+        const token = SessionStorageService.getItem('token');
+        const respuesta = await fetch(`http://localhost:3000/api/ordenproducto/orden/${ordenId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         manejarErrores(respuesta);
         return await respuesta.json();
     } catch (error) {
@@ -27,10 +54,12 @@ export const obtenerProductoDeOrdenPorId = async (id) => {
 
 export const crearProductoDeOrden = async (idOrden, idProducto, cantidadVendida, subtotal, precioVenta) => {
     try {
+        const token = SessionStorageService.getItem('token');
         const respuesta = await fetch('http://localhost:3000/api/ordenproducto', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ idOrden, idProducto, cantidadVendida, subtotal, precioVenta })
         });
@@ -43,10 +72,12 @@ export const crearProductoDeOrden = async (idOrden, idProducto, cantidadVendida,
 
 export const actualizarProductoDeOrden = async (id, idOrden, idProducto, cantidadVendida, subtotal, precioVenta) => {
     try {
+        const token = SessionStorageService.getItem('token');
         const respuesta = await fetch(`http://localhost:3000/api/ordenproducto/${id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ idOrden, idProducto, cantidadVendida, subtotal, precioVenta })
         });
@@ -59,8 +90,12 @@ export const actualizarProductoDeOrden = async (id, idOrden, idProducto, cantida
 
 export const eliminarProductoDeOrden = async (id) => {
     try {
+        const token = SessionStorageService.getItem('token');
         const respuesta = await fetch(`http://localhost:3000/api/ordenproducto/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
         manejarErrores(respuesta);
         return { message: 'Producto de orden eliminado' };
